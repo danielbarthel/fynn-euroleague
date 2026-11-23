@@ -2,146 +2,44 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Fynnomenal – Road to the Final Four</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0b0d12; --panel:#141823; --panel2:#1b2030; --line:#2a3145;
-    --text:#f3f5fa; --muted:#9aa3b8; --orange:#ff6a13; --orange2:#ff9a3d;
-    --gold:#ffd25a; --green:#34d399; --red:#f43f5e;
-    --team1:#ff6a13; --team2:#ffffff;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,sans-serif}
-  h1,h2,h3,.display{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;letter-spacing:.02em;font-weight:400;margin:0}
-  a{color:var(--orange2)}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
-  button{font:inherit;cursor:pointer}
-
-  /* HERO */
-  .hero{position:relative;overflow:hidden;min-height:92vh;display:flex;align-items:center;
-    background:radial-gradient(1200px 600px at 70% 10%,rgba(255,106,19,.28),transparent 60%),
-               radial-gradient(800px 500px at 10% 90%,rgba(255,210,90,.12),transparent 60%),var(--bg)}
-  .hero::after{content:"";position:absolute;inset:0;background:
-    repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 1px,transparent 1px 80px);pointer-events:none}
-  .hero .tag{display:inline-block;border:1px solid var(--line);padding:6px 12px;border-radius:999px;color:var(--muted);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
-  .hero h1{font-size:clamp(72px,16vw,200px);line-height:.85;margin:18px 0 10px;
-    background:linear-gradient(180deg,#fff 30%,var(--orange2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p.lead{font-size:clamp(17px,2.2vw,22px);color:#cfd5e3;max-width:620px;line-height:1.5}
-  .cta{display:inline-flex;gap:10px;align-items:center;margin-top:28px;background:var(--orange);color:#111;border:0;
-    padding:16px 26px;border-radius:14px;font-weight:800;font-size:17px;box-shadow:0 10px 40px rgba(255,106,19,.4);transition:transform .15s}
-  .cta:hover{transform:translateY(-2px)}
-  .ball{position:absolute;right:6%;top:18%;width:min(34vw,360px);aspect-ratio:1;animation:bounce 1.6s cubic-bezier(.5,0,.5,1) infinite alternate;z-index:0;opacity:.95}
-  @keyframes bounce{from{transform:translateY(0) rotate(0)}to{transform:translateY(60px) rotate(25deg)}}
-  .hero .wrap{position:relative;z-index:1;width:100%}
-  @media (max-width:700px){.ball{opacity:.25;right:-20%;top:5%;width:80vw}}
-
-  section{padding:80px 0}
-  .kicker{color:var(--orange2);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:13px}
-  h2{font-size:clamp(44px,7vw,72px);line-height:.95;margin:8px 0 14px}
-  .sub{color:var(--muted);max-width:640px;line-height:1.6;margin:0 0 30px}
-
-  /* STEP 1 – team */
-  .teams{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
-  .team{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:14px;text-align:left;color:var(--text);
-    display:flex;gap:10px;align-items:center;transition:all .15s}
-  .team:hover{border-color:#4a5577;transform:translateY(-2px)}
-  .team.sel{border-color:var(--orange);background:var(--panel2);box-shadow:0 0 0 4px rgba(255,106,19,.18)}
-  .team .sw{width:28px;height:28px;border-radius:50%;flex:none;border:2px solid rgba(255,255,255,.25)}
-  .team span{font-weight:600;font-size:14px;line-height:1.2}
-
-  .form{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:26px 0}
-  @media (max-width:700px){.form{grid-template-columns:1fr}}
-  .form label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:600}
-  .form input,.form select{width:100%;background:var(--panel);border:2px solid var(--line);color:var(--text);padding:12px 14px;border-radius:12px;font:inherit;font-size:16px}
-  .form input:focus,.form select:focus{outline:none;border-color:var(--orange)}
-
-  /* Player card */
-  .signing{display:grid;grid-template-columns:340px 1fr;gap:34px;align-items:center;margin-top:40px}
-  @media (max-width:820px){.signing{grid-template-columns:1fr}}
-  .card{position:relative;width:100%;max-width:340px;aspect-ratio:3/4.3;border-radius:22px;padding:22px;overflow:hidden;
-    background:linear-gradient(160deg,var(--team1),#0b0d12 75%);border:2px solid rgba(255,255,255,.15);
-    box-shadow:0 30px 80px rgba(0,0,0,.6);transform-style:preserve-3d;transition:transform .2s}
-  .card::before{content:"";position:absolute;inset:-50%;background:conic-gradient(from 0deg,transparent,rgba(255,255,255,.18),transparent 30%);animation:spin 6s linear infinite}
-  @keyframes spin{to{transform:rotate(1turn)}}
-  .card>*{position:relative}
-  .card .ovr{font-family:"Bebas Neue",Impact,sans-serif;font-size:76px;line-height:.8}
-  .card .pos{font-weight:800;letter-spacing:.1em;font-size:14px;opacity:.85}
-  .card .num{position:absolute;right:20px;top:14px;font-family:"Bebas Neue",Impact,sans-serif;font-size:120px;line-height:1;opacity:.22;color:var(--team2)}
-  .card .name{font-family:"Bebas Neue",Impact,sans-serif;font-size:56px;line-height:.9;margin-top:90px}
-  .card .nick{color:var(--gold);font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
-  .card .club{font-size:13px;opacity:.8;margin-top:4px}
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
-  .stats div{background:rgba(0,0,0,.35);border-radius:10px;padding:8px;text-align:center}
-  .stats b{display:block;font-family:"Bebas Neue",Impact,sans-serif;font-size:28px;line-height:1}
-  .stats small{font-size:10px;letter-spacing:.12em;opacity:.75}
-  .news{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px}
-  .breaking{display:inline-block;background:var(--red);color:#fff;font-weight:800;font-size:12px;letter-spacing:.14em;padding:5px 10px;border-radius:6px;animation:blink 1s steps(2) infinite}
-  @keyframes blink{50%{opacity:.55}}
-  .news h3{font-size:clamp(30px,4vw,44px);line-height:1;margin:14px 0 10px}
-  .news p{color:#cfd5e3;line-height:1.6;margin:0 0 10px}
-  .quote{border-left:3px solid var(--orange);padding-left:14px;font-style:italic;color:#fff}
-
-  /* GAME */
-  .gamebox{background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden}
-  .scoreboard{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;padding:14px 18px;background:#06070a;border-bottom:1px solid var(--line)}
-  .sb-team{display:flex;align-items:center;gap:10px;min-width:0}
-  .sb-team.right{justify-content:flex-end;text-align:right}
-  .sb-team .nm{font-weight:800;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .sb-score{font-family:"Bebas Neue",Impact,sans-serif;font-size:48px;line-height:1;font-variant-numeric:tabular-nums}
-  .sb-mid{text-align:center}
-  .sb-clock{font-family:"Bebas Neue",Impact,sans-serif;font-size:34px;color:var(--gold);line-height:1;font-variant-numeric:tabular-nums}
-  .sb-q{font-size:11px;color:var(--muted);letter-spacing:.14em}
-  .canvaswrap{position:relative}
-  canvas#court{display:block;width:100%;height:auto;touch-action:manipulation;cursor:pointer}
-  .ticker{padding:14px 18px;border-top:1px solid var(--line);min-height:56px;font-weight:600;display:flex;gap:10px;align-items:center}
-  .ticker .mic{flex:none;width:30px;height:30px;border-radius:50%;background:var(--orange);display:grid;place-items:center;color:#111;font-size:15px}
-  .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-    background:rgba(6,7,10,.78);backdrop-filter:blur(3px);padding:20px}
-  .overlay h3{font-size:clamp(36px,6vw,64px);line-height:.95}
-  .overlay p{color:#cfd5e3;max-width:520px;line-height:1.55}
-  .hidden{display:none!important}
-  .howto{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-  @media (max-width:700px){.howto{grid-template-columns:1fr}}
-  .howto div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;color:#cfd5e3;font-size:14px;line-height:1.5}
-  .howto b{color:#fff}
-
-  /* CHAMPION */
-  #champ{position:fixed;inset:0;z-index:50;background:radial-gradient(circle at 50% 35%,rgba(255,210,90,.35),rgba(6,7,10,.96) 60%);
-    display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;overflow:auto}
-  #confetti{position:fixed;inset:0;pointer-events:none;z-index:51}
-  #champ .trophy{font-size:120px;animation:lift 1.2s ease-in-out infinite alternate;filter:drop-shadow(0 10px 40px rgba(255,210,90,.6))}
-  @keyframes lift{to{transform:translateY(-14px) rotate(-4deg)}}
-  #champ h2{font-size:clamp(48px,10vw,110px);color:var(--gold)}
-  #champ .mvp{display:inline-block;margin:6px 0 16px;background:var(--gold);color:#111;font-weight:800;padding:8px 16px;border-radius:999px;letter-spacing:.08em}
-  #champ p{color:#e8ebf3;max-width:620px;margin:0 auto 10px;line-height:1.6;font-size:17px}
-  .boxscore{display:flex;gap:10px;justify-content:center;margin:18px 0;flex-wrap:wrap}
-  .boxscore div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 18px}
-  .boxscore b{display:block;font-family:"Bebas Neue",Impact,sans-serif;font-size:40px;line-height:1}
-  .boxscore small{color:var(--muted);font-size:11px;letter-spacing:.12em}
-  .btnrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
-  .ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3);padding:14px 22px;border-radius:14px;font-weight:800}
-
-  /* CABINET */
-  .cabinet{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-  @media (max-width:700px){.cabinet{grid-template-columns:repeat(2,1fr)}}
-  .cab{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;text-align:center}
-  .cab .ic{font-size:34px}
-  .cab b{display:block;font-family:"Bebas Neue",Impact,sans-serif;font-size:52px;line-height:1;margin-top:6px}
-  .cab small{color:var(--muted);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-  .shelf{margin-top:16px;min-height:70px;background:linear-gradient(#1b2030,#141823);border:1px solid var(--line);border-radius:16px;
-    padding:14px;font-size:40px;letter-spacing:6px;display:flex;flex-wrap:wrap;align-items:flex-end;border-bottom:8px solid #3a2a1a}
-  .shelf:empty::before{content:"Noch leer – hol dir den ersten Titel 👆";font-size:14px;letter-spacing:0;color:var(--muted)}
-  .coach{margin-top:26px;background:linear-gradient(120deg,rgba(255,106,19,.18),transparent);border:1px solid var(--line);border-radius:16px;padding:20px}
-  footer{padding:40px 0 60px;color:var(--muted);text-align:center;font-size:14px}
-</style>
+<meta name="description" content="Unterschreib bei deinem EuroLeague-Traumclub, triff den letzten Dreier im Final-Four-Finale und gewinn den Dreier-Contest. Ein Basketball-Spiel für Fynn.">
+<meta name="theme-color" content="#0b0d12">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://fynn.wepp-solutions.de/">
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="Fynnomenal – Road to the Final Four">
+<meta property="og:description" content="Der letzte Wurf im EuroLeague-Finale gehört dir. Triffst du?">
+<meta property="og:url" content="https://fynn.wepp-solutions.de/">
+<meta property="og:image" content="https://fynn.wepp-solutions.de/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/bebas-neue-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+<a class="skip" href="#final">Direkt zum Spiel</a>
 
-<!-- HERO -->
-<header class="hero">
+<nav class="nav" aria-label="Hauptnavigation">
+  <div class="wrap navin">
+    <a class="brand" href="#top"><span aria-hidden="true">🏀</span> FYNNOMENAL</a>
+    <div class="links">
+      <a href="#sign">Transfer</a>
+      <a href="#final">Spiel</a>
+      <a href="#cabinet">Vitrine</a>
+      <button type="button" id="soundBtn" class="icon-btn" aria-pressed="true" aria-label="Sound ausschalten">🔊</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
   <svg class="ball" viewBox="0 0 100 100" aria-hidden="true">
     <defs><radialGradient id="bg" cx="35%" cy="30%"><stop offset="0" stop-color="#ffb06a"/><stop offset=".55" stop-color="#ff6a13"/><stop offset="1" stop-color="#a33a00"/></radialGradient></defs>
     <circle cx="50" cy="50" r="48" fill="url(#bg)"/>
@@ -153,525 +51,163 @@
   <div class="wrap">
     <span class="tag">🏀 Für Fynn · EuroLeague Edition</span>
     <h1>FYNN&shy;OMENAL</h1>
-    <p class="lead">Heute ist dein Tag, Fynn. Du unterschreibst bei deinem EuroLeague-Traumclub, stehst im Final-Four-Finale – und der letzte Wurf gehört <b>dir</b>.</p>
-    <button class="cta" onclick="document.getElementById('sign').scrollIntoView({behavior:'smooth'})">Karriere starten →</button>
+    <p class="lead">Heute ist dein Tag, <span class="pn">Fynn</span>. Du unterschreibst bei deinem EuroLeague-Traumclub, stehst im Final-Four-Finale – und der letzte Wurf gehört <b>dir</b>.</p>
+    <div class="hero-cta">
+      <button type="button" class="cta" data-goto="sign">Karriere starten →</button>
+      <button type="button" class="ghost" data-goto="final">Direkt spielen</button>
+    </div>
   </div>
 </header>
 
-<!-- STEP 1: SIGN -->
-<section id="sign">
+<main>
+<section id="sign" aria-labelledby="h-sign">
   <div class="wrap">
     <div class="kicker">Schritt 1 · Transfer-Hammer</div>
-    <h2>Wähle deinen Club</h2>
+    <h2 id="h-sign">Wähle deinen Club</h2>
     <p class="sub">Alle Clubs wollen dich. Dein Agent hat das Telefon nicht mehr aus der Hand gelegt. Such dir aus, wo du Geschichte schreibst.</p>
 
-    <div class="teams" id="teams"></div>
+    <div class="teams" id="teams" role="group" aria-label="EuroLeague-Clubs"></div>
 
     <div class="form">
-      <div><label for="pname">Name auf dem Trikot</label><input id="pname" value="Fynn" maxlength="14"></div>
-      <div><label for="pnum">Trikotnummer</label><input id="pnum" type="number" min="0" max="99" value="7"></div>
+      <div><label for="pname">Name auf dem Trikot</label><input id="pname" value="Fynn" maxlength="14" autocomplete="off"></div>
+      <div><label for="pnum">Trikotnummer</label><input id="pnum" type="number" inputmode="numeric" min="0" max="99" value="7"></div>
       <div><label for="ppos">Position</label>
         <select id="ppos">
           <option>Point Guard</option><option selected>Shooting Guard</option><option>Small Forward</option><option>Power Forward</option><option>Center</option>
         </select></div>
     </div>
-    <button class="cta" id="signBtn">✍️ Vertrag unterschreiben</button>
+    <button type="button" class="cta" id="signBtn">✍️ Vertrag unterschreiben</button>
 
-    <div class="signing hidden" id="signing">
-      <div class="card" id="card">
-        <div class="num" id="cNum">7</div>
-        <div class="ovr" id="cOvr">97</div>
-        <div class="pos" id="cPos">SG</div>
-        <div class="name" id="cName">FYNN</div>
-        <div class="nick" id="cNick">„Mr. Final Four“</div>
-        <div class="club" id="cClub">Club</div>
-        <div class="stats" id="cStats"></div>
+    <div class="signing" id="signing" hidden>
+      <div>
+        <div class="card" id="card" aria-label="Spielerkarte">
+          <div class="num" id="cNum">7</div>
+          <div class="ovr" id="cOvr">97</div>
+          <div class="pos" id="cPos">SG</div>
+          <div class="name" id="cName">FYNN</div>
+          <div class="nick" id="cNick"></div>
+          <div class="club" id="cClub"></div>
+          <div class="stats" id="cStats"></div>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="ghost sm" id="saveCardBtn">📸 Als Bild speichern</button>
+          <button type="button" class="ghost sm" id="shareCardBtn">📤 Teilen</button>
+          <button type="button" class="ghost sm" id="rerollBtn">🎲 Neu verhandeln</button>
+        </div>
       </div>
-      <div class="news">
+      <article class="news">
         <span class="breaking">BREAKING</span>
         <h3 id="nHead">Fynn unterschreibt!</h3>
         <p id="nBody"></p>
         <p class="quote" id="nQuote"></p>
-        <button class="cta" onclick="document.getElementById('final').scrollIntoView({behavior:'smooth'})">Ab zum Final Four →</button>
-      </div>
+        <button type="button" class="cta" data-goto="final">Ab zum Final Four →</button>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- STEP 2: GAME -->
-<section id="final" style="background:linear-gradient(180deg,transparent,#0f1219 30%,transparent)">
+<section id="final" class="band" aria-labelledby="h-final">
   <div class="wrap">
-    <div class="kicker">Schritt 2 · Das Finale</div>
-    <h2>Clutch Time im Final Four</h2>
-    <p class="sub">Letzte zwei Minuten im Finale. Die Halle bebt. Du bekommst fünf Würfe – und der letzte entscheidet über den Titel.</p>
+    <div class="kicker">Schritt 2 · Die Halle wartet</div>
+    <h2 id="h-final">Clutch Time</h2>
+    <p class="sub">Spiel das Final-Four-Finale mit dem letzten Wurf um den Titel – oder zeig im Dreier-Contest, wie viele Dreier du in 60 Sekunden versenkst.</p>
 
     <div class="gamebox">
-      <div class="scoreboard">
-        <div class="sb-team"><div class="sb-score" id="sHome">70</div><span class="nm" id="sHomeN">Dein Team</span></div>
-        <div class="sb-mid"><div class="sb-clock" id="sClock">2:00</div><div class="sb-q">4. VIERTEL · FINALE</div></div>
-        <div class="sb-team right"><span class="nm" id="sAwayN">Gegner</span><div class="sb-score" id="sAway">72</div></div>
+      <div class="scoreboard" aria-live="polite">
+        <div class="sb-team"><div class="sb-score" id="sHome">0</div><span class="nm" id="sHomeN">Dein Team</span></div>
+        <div class="sb-mid"><div class="sb-clock" id="sClock">–</div><div class="sb-q" id="sQ">BEREIT</div></div>
+        <div class="sb-team right"><span class="nm" id="sAwayN">Gegner</span><div class="sb-score" id="sAway">0</div></div>
       </div>
       <div class="canvaswrap">
-        <canvas id="court" width="900" height="500"></canvas>
+        <canvas id="court" width="900" height="500" tabindex="0" aria-label="Basketball-Spielfeld. Leertaste, Enter, Klick oder Tippen zum Werfen."></canvas>
         <div class="overlay" id="startOv">
           <h3>Bereit, <span class="pn">Fynn</span>?</h3>
-          <p>Der Wurfmeter links pendelt hoch und runter. <b>Klick / Tippen / Leertaste</b>, wenn er im grünen Bereich ist. Je weiter weg, desto schneller wird er.</p>
-          <button class="cta" id="startBtn">🏀 Tip-off</button>
+          <p>Der Power-Balken pendelt. <b>Klick, tippe oder drück die Leertaste</b>, wenn er im grünen Feld steht.</p>
+          <div class="modes">
+            <button type="button" class="mode" data-mode="final"><span class="mi" aria-hidden="true">🏆</span><b>Final-Four-Finale</b><small>5 Würfe · der letzte um den Titel</small></button>
+            <button type="button" class="mode" data-mode="contest"><span class="mi" aria-hidden="true">🎯</span><b>Dreier-Contest</b><small>25 Bälle · 60 Sekunden · Money Balls</small></button>
+          </div>
+          <div class="seg" role="group" aria-label="Schwierigkeit">
+            <button type="button" data-diff="rookie" aria-pressed="false">Rookie</button>
+            <button type="button" data-diff="pro" aria-pressed="true">Pro</button>
+            <button type="button" data-diff="legend" aria-pressed="false">Legende</button>
+          </div>
         </div>
-        <div class="overlay hidden" id="msgOv">
+        <div class="overlay" id="msgOv" hidden>
           <h3 id="msgH">Timeout</h3>
           <p id="msgP"></p>
-          <button class="cta" id="msgBtn">Weiter</button>
+          <div class="btnrow" id="msgBtns"></div>
         </div>
       </div>
-      <div class="ticker"><div class="mic">🎙</div><div id="ticker">Willkommen zum Final-Four-Finale! Die Arena ist ausverkauft.</div></div>
+      <div class="ticker">
+        <div class="mic" aria-hidden="true">🎙</div>
+        <div id="ticker" aria-live="polite">Willkommen in der Halle! Wähle einen Modus.</div>
+        <button type="button" class="ghost sm" id="menuBtn">Menü</button>
+      </div>
     </div>
 
     <div class="howto">
-      <div><b>1 · Timing</b><br>Der Balken pendelt. Klick, wenn er im grünen Feld steht.</div>
-      <div><b>2 · Echte Physik</b><br>Zu viel Kraft = Brett. Zu wenig = Airball. Ring-Roller können trotzdem reinfallen.</div>
-      <div><b>3 · Der letzte Wurf</b><br>3 Sekunden, 2 Punkte hinten. Dreier für den Titel. Kein Druck. 😅</div>
+      <div><b>⏱ Timing</b><br>Der Balken pendelt – klick, wenn er im grünen Feld steht. Das Feld zeigt exakt, wo der Ball reingeht.</div>
+      <div><b>🔥 On Fire</b><br>Drei Treffer in Folge: Der Balken wird langsamer, der Ball brennt. Ein Fehlwurf löscht das Feuer.</div>
+      <div><b>⚙️ Echte Physik</b><br>Brett, Ring, Airball – alles wird simuliert. Ring-Roller können trotzdem reinfallen.</div>
     </div>
   </div>
 </section>
 
-<!-- STEP 3: CABINET -->
-<section id="cabinet">
+<section id="cabinet" aria-labelledby="h-cab">
   <div class="wrap">
     <div class="kicker">Schritt 3 · Legacy</div>
-    <h2><span class="pn">Fynn</span>s Trophäenschrank</h2>
-    <p class="sub">Jeder Titel bleibt hier gespeichert – in diesem Browser. Komm wieder und bau deine Legende aus.</p>
+    <h2 id="h-cab"><span class="pn">Fynn</span>s Trophäenschrank</h2>
+    <p class="sub">Alles bleibt in diesem Browser gespeichert. Komm wieder und bau deine Legende aus.</p>
     <div class="cabinet">
-      <div class="cab"><div class="ic">🏆</div><b id="kTitles">0</b><small>EuroLeague-Titel</small></div>
-      <div class="cab"><div class="ic">⭐</div><b id="kMvp">0</b><small>Final-Four-MVPs</small></div>
-      <div class="cab"><div class="ic">🎯</div><b id="kClutch">0</b><small>Gamewinner</small></div>
-      <div class="cab"><div class="ic">🔥</div><b id="kPts">0</b><small>Karriere-Punkte</small></div>
+      <div class="cab"><div class="ic" aria-hidden="true">🏆</div><b id="kTitles">0</b><small>Titel</small></div>
+      <div class="cab"><div class="ic" aria-hidden="true">⭐</div><b id="kMvp">0</b><small>Final-Four-MVPs</small></div>
+      <div class="cab"><div class="ic" aria-hidden="true">🎯</div><b id="kBest">0</b><small>Contest-Rekord</small></div>
+      <div class="cab"><div class="ic" aria-hidden="true">⏱️</div><b id="kClutch">0</b><small>Gamewinner</small></div>
+      <div class="cab"><div class="ic" aria-hidden="true">🔥</div><b id="kPts">0</b><small>Karriere-Punkte</small></div>
+      <div class="cab"><div class="ic" aria-hidden="true">📈</div><b id="kPct">–</b><small>Trefferquote</small></div>
     </div>
-    <div class="shelf" id="shelf"></div>
-    <div class="coach"><div class="kicker">Coach sagt</div><p style="font-size:20px;line-height:1.5;margin:8px 0 0" id="coachQ"></p></div>
+    <div class="shelf" id="shelf" aria-label="Pokalregal"></div>
+
+    <h3 class="h3">Erfolge <span class="pill" id="achCount">0/12</span></h3>
+    <div class="achievements" id="achievements"></div>
+
+    <div class="coach"><div class="kicker">Coach sagt</div><p id="coachQ"></p></div>
+    <p class="reset"><button type="button" class="linkbtn" id="resetBtn">Karriere zurücksetzen</button></p>
   </div>
 </section>
+</main>
 
-<footer>Gemacht mit 🧡 für Fynn · Nächstes Mal schaust du das Final Four nicht nur – du spielst es.</footer>
+<footer>
+  <p>Gemacht mit 🧡 für <span class="pn">Fynn</span> · © <span id="year">2026</span></p>
+  <p class="fine">Fan-Projekt ohne Verbindung zur EuroLeague oder zu den genannten Clubs. · <a href="datenschutz.html">Datenschutz</a></p>
+</footer>
 
-<!-- CHAMPION OVERLAY -->
-<canvas id="confetti" class="hidden"></canvas>
-<div id="champ" class="hidden">
+<div id="champ" class="champ" role="dialog" aria-modal="true" aria-labelledby="chTitle" hidden>
   <div>
-    <div class="trophy">🏆</div>
+    <div class="trophy" aria-hidden="true">🏆</div>
     <div class="kicker" id="chClub">Club</div>
-    <h2><span class="pn">FYNN</span> IST CHAMPION!</h2>
+    <h2 id="chTitle"><span class="pn">FYNN</span> IST CHAMPION!</h2>
     <div class="mvp">⭐ FINAL FOUR MVP ⭐</div>
     <p id="chText"></p>
     <div class="boxscore" id="chBox"></div>
     <div class="btnrow">
-      <button class="cta" id="againBtn">🔁 Noch ein Titel</button>
-      <button class="ghost" id="closeBtn">Zum Trophäenschrank</button>
+      <button type="button" class="cta" id="againBtn">🔁 Noch ein Titel</button>
+      <button type="button" class="ghost" id="shareResultBtn">📤 Angeben</button>
+      <button type="button" class="ghost" id="closeBtn">Zum Trophäenschrank</button>
     </div>
   </div>
 </div>
+<canvas id="confetti" aria-hidden="true" hidden></canvas>
+<div id="toasts" class="toasts" aria-live="polite"></div>
 
-<script>
-(() => {
-/* ---------- DATA ---------- */
-const TEAMS = [
-  ["Real Madrid","#f4f4f4","#5b2a86"],["FC Barcelona","#a50044","#004d98"],["Fenerbahçe","#002d72","#ffed00"],
-  ["Olympiacos","#d50000","#ffffff"],["Panathinaikos","#007a3d","#ffffff"],["Anadolu Efes","#003c7e","#e30613"],
-  ["FC Bayern München","#dc052d","#ffffff"],["Žalgiris Kaunas","#006b3f","#ffffff"],["Partizan","#1a1a1a","#ffffff"],
-  ["Crvena zvezda","#e2001a","#ffffff"],["Maccabi Tel Aviv","#ffd200","#003399"],["Hapoel Tel Aviv","#e30613","#ffffff"],
-  ["AS Monaco","#e10b17","#ffffff"],["Olimpia Milano","#c8102e","#ffffff"],["Virtus Bologna","#222222","#ffffff"],
-  ["Paris Basketball","#111111","#e6007e"],["Baskonia","#003da5","#c8102e"],["Valencia Basket","#f39200","#111111"],
-  ["Dubai Basketball","#141414","#c9a24d"],["ASVEL","#003b7a","#ffffff"]
-];
-const NICKS = ["Mr. Final Four","Der Clutch-Kaiser","Fynnomenal","Ice in the Veins","Der Dreier-Doktor","Captain Buzzer-Beater","The Finisher","Mr. Big Shot"];
-const QUOTES = [
-  "Druck ist ein Privileg. Wer den letzten Ball will, hat ihn sich verdient.",
-  "Die Würfe, die keiner sieht – im leeren Gym um 7 Uhr – gewinnen die Spiele, die alle sehen.",
-  "Verpasster Wurf? Egal. Der nächste ist ein neuer Wurf.",
-  "Defense gewinnt Titel. Aber ein Dreier mit Brett im Rücken tut's auch.",
-  "Talent bringt dich ins Team. Arbeit bringt dich ins Final Four.",
-  "Wenn die Halle laut wird, wird dein Kopf leise.",
-  "Champions werden nicht im Mai gemacht, sondern im November."
-];
-const COMMENT_MAKE = [
-  "{n} steigt hoch … TREFFER! Was für ein Wurf!",
-  "Nichts als Netz! {n} ist heute nicht zu stoppen!",
-  "BANG! {n} trifft und die Halle explodiert!",
-  "Kalt wie Eis – {n} versenkt das Ding!",
-];
-const COMMENT_MISS = [
-  "Knapp daneben – {n} schüttelt sich kurz und läuft zurück.",
-  "Vom Ring! Der nächste fällt, ganz sicher.",
-  "Kein Glück diesmal – aber {n} will den Ball wieder haben.",
-];
-const POSS = [
-  {x:650, label:"Drive zur Zone", pts:2, clock:"1:48", speed:0.75},
-  {x:520, label:"Pull-up aus der Mitteldistanz", pts:2, clock:"1:12", speed:0.9},
-  {x:380, label:"Dreier über die Hand", pts:3, clock:"0:41", speed:1.0},
-  {x:470, label:"Fadeaway nach Screen", pts:2, clock:"0:15", speed:1.0},
-  {x:350, label:"DER LETZTE WURF", pts:3, clock:"0:03", speed:0.9, final:true},
-];
-
-/* ---------- STATE ---------- */
-let team = null, opp = null;
-const $ = id => document.getElementById(id);
-const pick = a => a[Math.floor(Math.random()*a.length)];
-const pname = () => ($("pname").value.trim() || "Fynn");
-
-/* ---------- STORAGE ---------- */
-const KEY = "fynnomenal-v1";
-function load(){ try{ return JSON.parse(localStorage.getItem(KEY)) || {} }catch(e){ return {} } }
-function save(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)) }catch(e){} }
-let career = Object.assign({titles:0,mvp:0,clutch:0,pts:0,shelf:[]}, load());
-function renderCabinet(){
-  $("kTitles").textContent = career.titles; $("kMvp").textContent = career.mvp;
-  $("kClutch").textContent = career.clutch; $("kPts").textContent = career.pts;
-  $("shelf").innerHTML = career.shelf.map(s=>`<span title="${s}">🏆</span>`).join("");
-}
-renderCabinet();
-$("coachQ").textContent = "„" + QUOTES[new Date().getDate() % QUOTES.length] + "“";
-
-/* ---------- TEAMS ---------- */
-const tw = $("teams");
-TEAMS.forEach((t,i)=>{
-  const b = document.createElement("button");
-  b.className = "team"; b.type="button";
-  b.innerHTML = `<i class="sw" style="background:linear-gradient(135deg,${t[1]} 50%,${t[2]} 50%)"></i><span>${t[0]}</span>`;
-  b.onclick = () => { document.querySelectorAll(".team").forEach(x=>x.classList.remove("sel")); b.classList.add("sel"); team = t; applyTeam(); };
-  tw.appendChild(b);
-});
-function applyTeam(){
-  if(!team) return;
-  document.documentElement.style.setProperty("--team1", team[1]);
-  document.documentElement.style.setProperty("--team2", team[2]);
-  $("sHomeN").textContent = team[0];
-}
-function syncName(){ document.querySelectorAll(".pn").forEach(e=>e.textContent = pname()); }
-$("pname").addEventListener("input", syncName);
-
-$("signBtn").onclick = () => {
-  if(!team){ const b = tw.children[Math.floor(Math.random()*TEAMS.length)]; b.click(); }
-  const n = pname(), num = Math.max(0,Math.min(99,parseInt($("pnum").value)||7));
-  const posFull = $("ppos").value, posShort = posFull.split(" ").map(w=>w[0]).join("").replace("C","C");
-  const st = [["SHOT",90,99],["CLUTCH",95,99],["IQ",88,98],["DEF",84,95],["PASS",85,97],["HYPE",99,99]]
-    .map(([k,a,b])=>[k, a+Math.floor(Math.random()*(b-a+1))]);
-  const ovr = Math.round(st.reduce((s,x)=>s+x[1],0)/st.length);
-  const nick = pick(NICKS);
-  $("cNum").textContent = num; $("cOvr").textContent = ovr; $("cPos").textContent = posShort;
-  $("cName").textContent = n.toUpperCase(); $("cNick").textContent = "„"+nick+"“"; $("cClub").textContent = team[0] + " · #" + num;
-  $("cStats").innerHTML = st.map(([k,v])=>`<div><b>${v}</b><small>${k}</small></div>`).join("");
-  const years = 3 + Math.floor(Math.random()*3);
-  $("nHead").textContent = `${n} unterschreibt bei ${team[0]}!`;
-  $("nBody").textContent = `Es ist offiziell: ${n} („${nick}“) wechselt als ${posFull} zu ${team[0]} und unterschreibt einen ${years}-Jahres-Vertrag. Die Nummer ${num} ist bereits ausverkauft – noch bevor das Trikot überhaupt gedruckt wurde. Der Trainer spricht vom „wichtigsten Transfer der Vereinsgeschichte“.`;
-  $("nQuote").textContent = `„Ich bin nicht hier, um mitzuspielen. Ich bin hier, um Titel zu holen.“ – ${n}`;
-  $("signing").classList.remove("hidden");
-  syncName();
-  setTimeout(()=>$("signing").scrollIntoView({behavior:"smooth",block:"center"}),50);
-};
-// card tilt
-const card = $("card");
-card.addEventListener("pointermove", e=>{
-  const r = card.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
-  card.style.transform = `perspective(800px) rotateY(${x*16}deg) rotateX(${-y*16}deg)`;
-});
-card.addEventListener("pointerleave", ()=>card.style.transform="");
-
-/* ---------- GAME ---------- */
-const cv = $("court"), ctx = cv.getContext("2d");
-const W = 900, H = 500, FLOOR = 440, RELEASE_Y = 318, G = 1500, R = 11;
-const HOOP = {x:780, y:200, front:752, back:808, board:822};
-let g = null; // game state
-let ballAnim = null, meter = 0, meterDir = 1, phase = "idle", netSwish = 0, crowd = 0, lastT = 0;
-
-function idealV(x0, y0, th){
-  const dx = HOOP.x - x0, up = y0 - HOOP.y;
-  return Math.sqrt(G*dx*dx / (2*Math.cos(th)**2 * (dx*Math.tan(th) - up)));
-}
-function setTicker(t){ $("ticker").textContent = t.replaceAll("{n}", pname()); }
-function updateBoard(){
-  $("sHome").textContent = g.home; $("sAway").textContent = g.away; $("sClock").textContent = g.clock;
-}
-
-function newGame(){
-  if(!team){ team = TEAMS[Math.floor(Math.random()*TEAMS.length)]; applyTeam(); }
-  do { opp = pick(TEAMS); } while(opp === team);
-  $("sAwayN").textContent = opp[0];
-  g = {i:0, home:70, away:72, clock:"2:00", made:0, att:0, pts:0, lastWasRetry:false};
-  updateBoard(); syncName();
-  setTicker(`Finale: ${team[0]} gegen ${opp[0]}. Zwei Minuten noch – und der Ball geht zu {n}!`);
-  startPossession();
-}
-function startPossession(){
-  const p = POSS[g.i];
-  g.p = p; g.clock = p.clock; updateBoard();
-  const th = p.final ? 0.92 : (p.x > 600 ? 0.98 : 0.9);
-  g.th = th; g.vIdeal = idealV(p.x, RELEASE_Y, th);
-  g.sweet = 0.3 + Math.random()*0.45;
-  // find the real make-window with the actual physics, so the green zone is honest
-  let best=[0,0], cur=null;
-  for(let e=-0.2; e<=0.2001; e+=0.005){
-    if(simShot(p.x, th, e)){ if(cur===null) cur=e; if(e-cur > best[1]-best[0]) best=[cur,e]; }
-    else cur=null;
-  }
-  g.off = (best[0]+best[1])/2; g.zone = Math.max(0.02, Math.min(0.06, (best[1]-best[0])/2));
-  meter = Math.random()*0.2; meterDir = 1;
-  phase = "aim";
-  if(p.final) setTicker(`Auszeit vorbei. 3 Sekunden. 2 Punkte hinten. Alle wissen, wer den Ball bekommt … {n}!`);
-  else setTicker(`${p.clock} – ${p.label}: {n} hat den Ball …`);
-}
-function makeBall(px, th, err){
-  const v = idealV(px, RELEASE_Y, th) * (1 + err * 0.33);
-  return {x:px+14, y:RELEASE_Y, vx:v*Math.cos(th), vy:-v*Math.sin(th), t:0, made:false, rot:0};
-}
-function simShot(px, th, err){
-  const b = makeBall(px, th, err), dt = 1/360;
-  for(let k=0;k<1440;k++){ stepBall(dt, b); if(b.made) return true; if(b.t>1 && b.y > FLOOR-R-2) return false; }
-  return false;
-}
-function shoot(){
-  if(phase !== "aim") return;
-  const p = g.p;
-  ballAnim = makeBall(p.x, g.th, (meter - g.sweet) + g.off);
-  phase = "flight"; g.att++;
-  setTicker(p.final ? "Der Wurf ist unterwegs … die Halle hält den Atem an …" : "{n} drückt ab …");
-}
-function stepBall(dt, b = ballAnim){
-  const py = b.y;
-  b.vy += G*dt; b.x += b.vx*dt; b.y += b.vy*dt; b.t += dt; b.rot += b.vx*dt*0.05;
-  // rim points
-  for(const rx of [HOOP.front, HOOP.back]){
-    const dx = b.x-rx, dy = b.y-HOOP.y, d = Math.hypot(dx,dy), min = R+4;
-    if(d < min && d > 0){
-      const nx=dx/d, ny=dy/d; b.x = rx+nx*min; b.y = HOOP.y+ny*min;
-      const vn = b.vx*nx + b.vy*ny;
-      if(vn < 0){ b.vx -= 1.55*vn*nx; b.vy -= 1.55*vn*ny; b.vx*=0.9; }
-    }
-  }
-  // backboard
-  if(b.x + R > HOOP.board && b.y > 110 && b.y < 214 && b.vx > 0){ b.x = HOOP.board - R; b.vx = -b.vx*0.55; }
-  // floor
-  if(b.y + R > FLOOR && b.vy > 0){ b.y = FLOOR-R; b.vy = -b.vy*0.55; b.vx *= 0.8; }
-  // score
-  if(!b.made && py < HOOP.y && b.y >= HOOP.y && b.vy > 0 && b.x > HOOP.front+4 && b.x < HOOP.back-4){ b.made = true; if(b === ballAnim) netSwish = 1; }
-  if(b.made && b.x > HOOP.front && b.x < HOOP.back && b.y > HOOP.y && b.y < HOOP.y+50){ b.vx *= 0.9; }
-}
-function endShot(){
-  const b = ballAnim, p = g.p; phase = "result";
-  if(b.made){
-    g.home += p.pts; g.made++; g.pts += p.pts; crowd = 1;
-    setTicker(pick(COMMENT_MAKE) + (p.pts===3 ? " DREIER!" : ""));
-  } else setTicker(pick(COMMENT_MISS));
-  updateBoard();
-  if(p.final){ setTimeout(()=> b.made ? win() : overtime(), 900); return; }
-  setTimeout(()=>{
-    // opponent possession
-    g.i++;
-    let o = pick([0,2,2,3]);
-    if(POSS[g.i].final){ o = Math.max(0, g.home + 2 - g.away); }
-    g.away += o; updateBoard();
-    if(POSS[g.i].final){
-      showMsg("AUSZEIT!", `${opp[0]} trifft auf der anderen Seite. ${g.home}:${g.away} – ihr liegt 2 Punkte hinten. Noch 3 Sekunden. Coach malt einen Spielzug aufs Board: Der Ball geht zu ${pname()}. Dreier für die Meisterschaft.`, "Ich nehm den Wurf 🔥", startPossession);
-    } else {
-      setTicker(o ? `${opp[0]} antwortet mit ${o} Punkten. Ball wieder bei ${team[0]}!` : `Stop in der Defense! Ball wieder bei ${team[0]}!`);
-      setTimeout(startPossession, 1100);
-    }
-  }, 1100);
-}
-function overtime(){
-  showMsg("SO KNAPP!", `Der Ball tanzt auf dem Ring … und fällt raus. Aber warte – Foul beim Wurf! Die Schiris checken das Video … neue 3 Sekunden. ${pname()} bekommt noch eine Chance!`, "Nochmal! 💪", ()=>{ g.away = g.home + 2; updateBoard(); startPossession(); });
-}
-function showMsg(h,p,btn,cb){
-  $("msgH").textContent = h; $("msgP").textContent = p; $("msgBtn").textContent = btn;
-  $("msgOv").classList.remove("hidden");
-  $("msgBtn").onclick = () => { $("msgOv").classList.add("hidden"); cb(); };
-}
-
-/* ---------- DRAW ---------- */
-function drawCourt(){
-  // arena background
-  const sky = ctx.createLinearGradient(0,0,0,FLOOR);
-  sky.addColorStop(0,"#07080c"); sky.addColorStop(1,"#141826");
-  ctx.fillStyle = sky; ctx.fillRect(0,0,W,FLOOR);
-  // crowd dots
-  for(let r=0;r<6;r++){
-    for(let c=0;c<46;c++){
-      const x = c*20 + (r%2)*10, y = 40 + r*22;
-      const jump = crowd>0 ? Math.sin((c*1.7+r)+performance.now()/90)*crowd*5 : 0;
-      ctx.fillStyle = (c+r)%5===0 ? (getComputedStyle(document.documentElement).getPropertyValue("--team1")||"#ff6a13") : `rgba(255,255,255,${0.05+((c*7+r*3)%5)*0.025})`;
-      ctx.beginPath(); ctx.arc(x, y+jump, 6, 0, 7); ctx.fill();
-    }
-  }
-  // camera flashes
-  if(crowd>0.3) for(let i=0;i<4;i++){ ctx.fillStyle="rgba(255,255,255,.8)"; ctx.beginPath(); ctx.arc(Math.random()*W, 40+Math.random()*120, 2+Math.random()*3,0,7); ctx.fill(); }
-  // banner
-  ctx.fillStyle = "rgba(255,106,19,.9)"; ctx.fillRect(0,178,W,26);
-  ctx.fillStyle = "#111"; ctx.font = "bold 16px Inter, sans-serif"; ctx.textAlign="center";
-  ctx.fillText("FINAL FOUR · CHAMPIONSHIP GAME · FINAL FOUR · CHAMPIONSHIP GAME", W/2 - 60, 197);
-  // floor
-  const fl = ctx.createLinearGradient(0,FLOOR,0,H);
-  fl.addColorStop(0,"#c98a4b"); fl.addColorStop(1,"#8a5a2b");
-  ctx.fillStyle = fl; ctx.fillRect(0,FLOOR,W,H-FLOOR);
-  ctx.strokeStyle = "rgba(0,0,0,.12)"; ctx.lineWidth=1;
-  for(let x=0;x<W;x+=36){ ctx.beginPath(); ctx.moveTo(x,FLOOR); ctx.lineTo(x-20,H); ctx.stroke(); }
-  // three-point line marker
-  ctx.strokeStyle = "rgba(255,255,255,.8)"; ctx.lineWidth = 3;
-  ctx.beginPath(); ctx.moveTo(395,FLOOR+2); ctx.lineTo(380,H); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(600,FLOOR+2); ctx.lineTo(592,H); ctx.stroke();
-  // pole + board
-  ctx.fillStyle = "#555c6e"; ctx.fillRect(860,150,10,FLOOR-150); ctx.fillRect(826,160,40,8);
-  ctx.fillStyle = "rgba(230,240,255,.85)"; ctx.fillRect(HOOP.board,104,8,116);
-  ctx.strokeStyle="#ff3b3b"; ctx.lineWidth=2; ctx.strokeRect(HOOP.board+1,168,6,30);
-}
-function drawNet(){
-  const sw = netSwish;
-  ctx.strokeStyle = "rgba(255,255,255,.85)"; ctx.lineWidth = 1.5;
-  const bottomL = HOOP.front+12, bottomR = HOOP.back-12, depth = 46 + sw*10;
-  for(let i=0;i<=6;i++){
-    const tx = HOOP.front + (HOOP.back-HOOP.front)*i/6;
-    const bx = bottomL + (bottomR-bottomL)*i/6 + Math.sin(performance.now()/40+i)*sw*4;
-    ctx.beginPath(); ctx.moveTo(tx,HOOP.y); ctx.lineTo(bx,HOOP.y+depth); ctx.stroke();
-  }
-  for(let k=1;k<=3;k++){
-    const y = HOOP.y + depth*k/3.3, shrink = 12*k/3;
-    ctx.beginPath(); ctx.moveTo(HOOP.front+shrink, y); ctx.lineTo(HOOP.back-shrink, y); ctx.stroke();
-  }
-}
-function drawRim(){
-  ctx.strokeStyle = "#ff5a1f"; ctx.lineWidth = 5;
-  ctx.beginPath(); ctx.moveTo(HOOP.front,HOOP.y); ctx.lineTo(HOOP.board,HOOP.y); ctx.stroke();
-}
-function drawPlayer(){
-  if(!g || !g.p) return;
-  const x = g.p.x, t1 = getComputedStyle(document.documentElement).getPropertyValue("--team1").trim()||"#ff6a13";
-  const t2 = getComputedStyle(document.documentElement).getPropertyValue("--team2").trim()||"#fff";
-  const jump = phase==="flight" && ballAnim && ballAnim.t < .5 ? Math.sin(ballAnim.t/.5*Math.PI)*28 : 0;
-  const fy = FLOOR - jump;
-  // shadow
-  ctx.fillStyle="rgba(0,0,0,.3)"; ctx.beginPath(); ctx.ellipse(x,FLOOR+4,28-jump*.3,6,0,0,7); ctx.fill();
-  // legs
-  ctx.strokeStyle="#6b4226"; ctx.lineWidth=10; ctx.lineCap="round";
-  ctx.beginPath(); ctx.moveTo(x-8,fy-50); ctx.lineTo(x-10,fy-4); ctx.moveTo(x+8,fy-50); ctx.lineTo(x+10,fy-4); ctx.stroke();
-  // shoes
-  ctx.fillStyle="#fff"; ctx.fillRect(x-20,fy-8,16,8); ctx.fillRect(x+4,fy-8,16,8);
-  // shorts
-  ctx.fillStyle=t1; ctx.fillRect(x-18,fy-70,36,26);
-  // jersey
-  ctx.fillStyle=t1; ctx.beginPath(); ctx.roundRect(x-20,fy-122,40,56,8); ctx.fill();
-  ctx.strokeStyle=t2; ctx.lineWidth=2; ctx.stroke();
-  ctx.fillStyle=t2; ctx.font="bold 22px 'Bebas Neue', Impact, sans-serif"; ctx.textAlign="center";
-  ctx.fillText(String(Math.max(0,Math.min(99,parseInt($("pnum").value)||7))), x, fy-84);
-  // arms (shooting pose)
-  ctx.strokeStyle="#6b4226"; ctx.lineWidth=8;
-  const up = phase==="aim" ? .2 : 1;
-  ctx.beginPath(); ctx.moveTo(x+14,fy-114); ctx.lineTo(x+20,fy-120-up*30); ctx.moveTo(x-14,fy-114); ctx.lineTo(x+6,fy-122-up*24); ctx.stroke();
-  // head
-  ctx.fillStyle="#6b4226"; ctx.beginPath(); ctx.arc(x,fy-138,15,0,7); ctx.fill();
-  ctx.fillStyle="#1a1a1a"; ctx.beginPath(); ctx.arc(x,fy-143,15,Math.PI,0); ctx.fill();
-  // name tag
-  ctx.fillStyle="rgba(0,0,0,.6)"; const nm = pname().toUpperCase(); ctx.font="bold 13px Inter, sans-serif";
-  const w = ctx.measureText(nm).width+16; ctx.beginPath(); ctx.roundRect(x-w/2,fy-178,w,20,6); ctx.fill();
-  ctx.fillStyle="#fff"; ctx.fillText(nm,x,fy-163);
-}
-function drawBall(x,y,rot){
-  ctx.save(); ctx.translate(x,y); ctx.rotate(rot||0);
-  const gr = ctx.createRadialGradient(-4,-4,2,0,0,R); gr.addColorStop(0,"#ffb06a"); gr.addColorStop(1,"#d9530a");
-  ctx.fillStyle=gr; ctx.beginPath(); ctx.arc(0,0,R,0,7); ctx.fill();
-  ctx.strokeStyle="#2a1205"; ctx.lineWidth=1.2;
-  ctx.beginPath(); ctx.moveTo(-R,0); ctx.lineTo(R,0); ctx.moveTo(0,-R); ctx.lineTo(0,R); ctx.stroke();
-  ctx.restore();
-}
-function drawMeter(){
-  const x=24,y=230,w=26,h=190;
-  ctx.fillStyle="rgba(0,0,0,.55)"; ctx.beginPath(); ctx.roundRect(x-6,y-30,w+12,h+40,10); ctx.fill();
-  ctx.fillStyle="#2a3145"; ctx.fillRect(x,y,w,h);
-  // sweet zone (bottom=0, top=1)
-  const zone = g.zone;
-  const zy = y + h*(1-(g.sweet+zone)), zh = h*zone*2;
-  ctx.fillStyle="rgba(52,211,153,.9)"; ctx.fillRect(x,zy,w,zh);
-  ctx.fillStyle="rgba(52,211,153,.25)"; ctx.fillRect(x,zy-h*.04,w,zh+h*.08);
-  // indicator
-  const my = y + h*(1-meter);
-  ctx.fillStyle="#fff"; ctx.fillRect(x-6,my-2,w+12,4);
-  ctx.beginPath(); ctx.moveTo(x+w+6,my); ctx.lineTo(x+w+14,my-7); ctx.lineTo(x+w+14,my+7); ctx.fill();
-  ctx.font="bold 11px Inter, sans-serif"; ctx.textAlign="center"; ctx.fillStyle="#cfd5e3"; ctx.fillText("POWER",x+w/2,y-12);
-  // label
-  ctx.textAlign="left"; ctx.font="bold 15px Inter, sans-serif"; ctx.fillStyle = g.p.final ? "#ffd25a" : "#fff";
-  ctx.fillText((g.p.final?"⚡ ":"")+g.p.label+` · ${g.p.pts} PKT`, 80, 250);
-  ctx.font="13px Inter, sans-serif"; ctx.fillStyle="#9aa3b8"; ctx.fillText("Klick / Tippen / Leertaste zum Werfen", 80, 270);
-}
-
-function frame(t){
-  const dt = Math.min(0.033, (t - (lastT||t))/1000); lastT = t;
-  if(phase==="aim"){
-    meter += meterDir * dt * g.p.speed;
-    if(meter>1){meter=1;meterDir=-1} if(meter<0){meter=0;meterDir=1}
-  }
-  if(phase==="flight" && ballAnim){
-    const n=6; for(let i=0;i<n;i++) stepBall(dt/n);
-    const b = ballAnim;
-    if(b.t>4 || b.x < -30 || b.x > W+30 || (b.made && b.y > FLOOR-30) || (!b.made && b.t>1 && b.y > FLOOR-R-2 && Math.abs(b.vy)<120)) endShot();
-  }
-  netSwish = Math.max(0, netSwish - dt*1.5);
-  crowd = Math.max(0, crowd - dt*0.5);
-
-  drawCourt();
-  drawNet();
-  drawPlayer();
-  if(g && g.p){
-    if(phase==="aim") drawBall(g.p.x+16, RELEASE_Y+ (phase==="aim"? 70:0));
-    if(ballAnim && phase!=="aim") drawBall(ballAnim.x, ballAnim.y, ballAnim.rot);
-    if(phase==="aim") drawMeter();
-  }
-  drawRim();
-  if(ballAnim && phase!=="aim" && ballAnim.y < HOOP.y && ballAnim.x > HOOP.front-R && ballAnim.x < HOOP.back+R) drawBall(ballAnim.x, ballAnim.y, ballAnim.rot);
-  requestAnimationFrame(frame);
-}
-requestAnimationFrame(frame);
-
-cv.addEventListener("pointerdown", e=>{ e.preventDefault(); shoot(); });
-window.addEventListener("keydown", e=>{
-  if(e.code==="Space" && phase==="aim"){ e.preventDefault(); shoot(); }
-});
-$("startBtn").onclick = () => { $("startOv").classList.add("hidden"); newGame(); };
-
-/* ---------- CHAMPION ---------- */
-function win(){
-  phase = "idle";
-  career.titles++; career.mvp++; career.clutch++; career.pts += g.pts;
-  career.shelf.push(`${team[0]} – ${new Date().toLocaleDateString("de-DE")}`);
-  save(career); renderCabinet();
-  const n = pname();
-  $("chClub").textContent = `${team[0]} · EuroLeague-Champion`;
-  $("chText").innerHTML = `Mit der Schlusssirene! ${n} trifft den Dreier zum <b>${g.home}:${g.away}</b> gegen ${opp[0]} und holt den EuroLeague-Titel. Die Mitspieler begraben ${n} unter sich, die Fans stürmen fast das Parkett – und irgendwo schreibt ein Reporter schon die Schlagzeile: <b>„${n.toUpperCase()} – EINFACH FYNNOMENAL.“</b>`;
-  $("chBox").innerHTML = `<div><b>${g.pts}</b><small>PUNKTE (CLUTCH)</small></div><div><b>${g.made}/${g.att}</b><small>WÜRFE</small></div><div><b>${career.titles}</b><small>TITEL INSGESAMT</small></div>`;
-  syncName();
-  $("champ").classList.remove("hidden"); $("confetti").classList.remove("hidden");
-  confetti();
-}
-let confRun = false;
-function confetti(){
-  const c = $("confetti"), x = c.getContext("2d");
-  c.width = innerWidth; c.height = innerHeight;
-  const cols = ["#ffd25a","#ff6a13","#ffffff", team[1], team[2], "#34d399"];
-  const P = Array.from({length:260},()=>({x:Math.random()*c.width,y:-Math.random()*c.height,
-    vx:(Math.random()-.5)*3, vy:2+Math.random()*4, r:Math.random()*6, s:4+Math.random()*7, c:pick(cols), w:Math.random()*10}));
-  confRun = true;
-  (function tick(){
-    if(!confRun){ x.clearRect(0,0,c.width,c.height); return; }
-    x.clearRect(0,0,c.width,c.height);
-    for(const p of P){
-      p.x += p.vx + Math.sin(p.w+=.05); p.y += p.vy; p.r += .1;
-      if(p.y > c.height+20){ p.y = -20; p.x = Math.random()*c.width; }
-      x.save(); x.translate(p.x,p.y); x.rotate(p.r); x.fillStyle=p.c; x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2); x.restore();
-    }
-    requestAnimationFrame(tick);
-  })();
-}
-function closeChamp(){ confRun=false; $("champ").classList.add("hidden"); $("confetti").classList.add("hidden"); }
-$("againBtn").onclick = () => { closeChamp(); $("final").scrollIntoView({behavior:"smooth"}); setTimeout(newGame, 400); };
-$("closeBtn").onclick = () => { closeChamp(); $("cabinet").scrollIntoView({behavior:"smooth"}); };
-addEventListener("resize", ()=>{ const c=$("confetti"); c.width=innerWidth; c.height=innerHeight; });
-})();
-</script>
+<script src="js/physics.js" defer></script>
+<script src="js/data.js" defer></script>
+<script src="js/fx.js" defer></script>
+<script src="js/audio.js" defer></script>
+<script src="js/store.js" defer></script>
+<script src="js/card.js" defer></script>
+<script src="js/game.js" defer></script>
+<script src="js/main.js" defer></script>
 </body>
 </html>
